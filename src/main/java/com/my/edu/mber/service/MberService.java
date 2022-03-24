@@ -1,0 +1,40 @@
+package com.my.edu.mber.service;
+
+import java.util.List;
+
+import com.my.edu.mber.vo.MberVO;
+
+public interface MberService {
+
+	/**
+	 * 회원 목록
+	 * @param mberVO
+	 * @return
+	 * @throws Exception
+	 */
+	public List<MberVO> selectMberList(MberVO mberVO) throws Exception;
+	
+	/**
+	 * 회원 검증
+	 * @param mberVO
+	 * @return
+	 * @throws Exception
+	 */
+	public MberVO selectMberComfirmInfo(MberVO mberVO) throws Exception;
+	
+	/**
+	 * 회원 아이디 중복 체크
+	 * @param mberVO
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectMberIdDupCheck(MberVO mberVO) throws Exception;
+	
+	/**
+	 * 회원 등록
+	 * @param mberVO
+	 * @return
+	 * @throws Exception
+	 */
+	public int mberInsert(MberVO mberVO) throws Exception;
+}

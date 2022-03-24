@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.my.edu.mber.mapper.MberMapper">
+
+	<!-- 회원 목록 -->
+	<select id="selectMberList" parameterType="com.my.edu.mber.vo.MberVO" resultType="com.my.edu.mber.vo.MberVO">
+		/* selectMberList */
+		
+		SELECT 
+			MBER_NO
+			,MBER_ID
+			,MBER_PW
+			,NAME
+			,BIRTH
+			,EMAIL
+			,MOBILE_TELNO
+			,USE_YN
+			,REG_ID
+			,REG_DT
+			,UPDT_ID
+			,UPDT_DT
+		FROM 
+			MEMBER
+		WHERE
+			USE_YN = 'Y'
+		
+	</select>
+	
+	<!-- 회원 검증 -->
+	<select id="selectMberComfirmInfo" parameterType="com.my.edu.mber.vo.MberVO" resultType="com.my.edu.mber.vo.MberVO">
+		/* selectMberComfirmInfo  */
+		
+		SELECT 
+			MBER_NO
+			,MBER_ID
+			,MBER_PW
+			,NAME
+			,BIRTH
+			,EMAIL
+			,MOBILE_TELNO
+			,USE_YN
+			,REG_ID
+			,REG_DT
+			,UPDT_ID
+			,UPDT_DT
+		FROM 
+			MEMBER
+		WHERE
+			USE_YN = 'Y' 
+			AND MBER_ID = #{mberId}
+			AND MBER_PW = #{mberPw}
+		
+	</select>
+	
+	<!-- 회원 아이디 중복 체크 -->
+	<select id="selectMberIdDupCheck" parameterType="com.my.edu.mber.vo.MberVO" resultType="int">
+		/* selectMberIdDupCheck  */
+		
+		SELECT 
+			COUNT(*)
+		FROM 
+			MEMBER
+		WHERE
+			USE_YN = 'Y' 
+			AND MBER_ID = #{mberId}
+		
+	</select>
+	
+	<!-- 회원 등록-->
+	<insert id="mberInsert" parameterType="com.my.edu.mber.vo.MberVO">
+	 	/* mberInsert */ 
+	
+		INSERT INTO
+	 		MEMBER
+	   			(
+				  	MBER_NO
+					,MBER_ID
+					,MBER_PW
+					,NAME
+					,BIRTH
+					,EMAIL
+					,MOBILE_TELNO
+					,USE_YN
+					,REG_ID
+					,REG_DT
+				)
+			VALUES
+				(
+				   MEMBER_SEQ.NEXTVAL
+				   ,#{mberId}
+				   ,#{mberPw}
+				   ,#{name}
+				   ,#{birth}
+				   ,#{email}
+				   ,#{mobileTelNo}
+				   ,'Y'
+				   ,#{regId}
+				   ,SYSDATE
+				)
+	</insert>
+	
+</mapper>
