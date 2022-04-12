@@ -240,9 +240,8 @@ function fnBbsDetail(no,openYn){
             //오류 발생 시 처리
            console.log('Ajax 통신 에러');
         }
-     });
-    
-};
+     }); 
+}
 
 function fnBbsPwChk(){
 	var form =$('#listForm');
@@ -301,10 +300,8 @@ function fnBbsPwChk(){
 	            //오류 발생 시 처리
 	           console.log('Ajax 통신 에러');
 	        }
-	     });
-	
-	 
-};
+	     }); 
+}
 
 
 // 게시글 등록
@@ -313,13 +310,48 @@ function fnBbsRegist(){
     
     form.attr('action', '/board/boardRegist.do');
     form.submit();
-};
+}
+
+function movePage(currentPage, cntPerPage, pageSize) {
+	var form = $('#pagingForm');
+	
+	$('#currentPage').val(currentPage);
+	$('#cntPerPage').val(cntPerPage);
+	$('#pageSize').val(pageSize);
+	
+	form.attr('action', '/board/boardList.do');
+	form.submit();
+}
+
+function changeSelectBox(currentPage, cntPerPage, pageSize) {
+	var seletcValue = $('#cntSelectBox option:selected').val();
+	
+	movePage(currentPage, seletcValue, pageSize);
+}
+
+function fnLogOut(){
+	var form = $('#listForm');
+	
+	form.attr('action', '/logout.do');
+	form.submit();
+}
+
+function fnmberList(){
+	var form = $('#listForm');
+	
+	form.attr('action', '/mber/mberList.do');
+	form.submit();
+}
+
 
 </script>
 
 </head>
 <body>
+<button type="button" style="float:right; margin-right: 170px;" onclick="fnLogOut();">로그아웃</button>
+<button type="button" style="float:right; margin-right: 20px;" onclick="fnmberList();">회원목록</button>
 <h2 style="text-align:center;">게시판</h2>
+
 <form id="listForm" name="listForm" method="post">
 <input type="hidden" id="mberId" name="mberId" value="${mberId}" />
 <input type="hidden" id="boardNo" name="boardNo" />
@@ -349,8 +381,42 @@ function fnBbsRegist(){
 		</tbody>
 	</table>
 </form>
+
+<form id="pagingForm" name="pagingForm" method="post">
+      <input type="hidden" id="currentPage" name="currentPage" value="" />
+      <input type="hidden" id="cntPerPage" name="cntPerPage" value="" />
+      <input type="hidden" id="pageSize" name="pageSize" value="" />
+   </form>
+   
+   <!--paginate -->
+    <div class="paginate">
+        <div class="paging">
+            <a class="direction prev" href="javascript:void(0);" onclick="movePage(1,${pagination.cntPerPage},${pagination.pageSize});">&lt;&lt; </a> 
+            <a class="direction prev" href="javascript:void(0);" onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasPreviousPage == true}">-1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">&lt; </a>
+ 
+           <c:forEach var="idx" begin="${pagination.firstPage}" end="${pagination.lastPage}">
+                <a style="color:<c:out value="${pagination.currentPage == idx ? '#cc0000; font-weight:700; margin-bottom: 2px;' : ''}"/> " href="javascript:void(0);" onclick="movePage(${idx},${pagination.cntPerPage},${pagination.pageSize});">
+                   <c:out value="${idx}" />
+                </a>
+            </c:forEach>
+            <a class="direction next" href="javascript:void(0);" onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasNextPage == true}">+1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">&gt; </a> 
+            <a class="direction next" href="javascript:void(0);" onclick="movePage(${pagination.totalRecordCount},'${pagination.cntPerPage},${pagination.pageSize});">&gt;&gt; </a>
+        </div>
+    </div>
+    <!-- /paginate -->
+    
+    <div class="bottom">
+        <div class="bottom-left" style="margin-left: 1280px; margin-top: 50px;">
+            <select id="cntSelectBox" name="cntSelectBox" onchange="changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize});" class="form-control" style="width: 100px;">
+                <option value="10" <c:if test="${pagination.cntPerPage == '10'}">selected</c:if>>10개씩</option>
+                <option value="20" <c:if test="${pagination.cntPerPage == '20'}">selected</c:if>>20개씩</option>
+                <option value="30" <c:if test="${pagination.cntPerPage == '30'}">selected</c:if>>30개씩</option>
+            </select>
+        </div>
+    </div>
+
 </br>
-<button type="button" id="bbsRegistBtn" style="float: right; margin-right: 190px;" onclick="fnBbsRegist();">등록</button>
+<button type="button" id="bbsRegistBtn" style="float: right; margin-right: 180px;" onclick="fnBbsRegist();">등록</button>
 </br>
 </br>
 <div id="bbsPwDiv" style="display: none;">

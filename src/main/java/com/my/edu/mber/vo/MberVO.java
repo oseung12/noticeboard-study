@@ -2,7 +2,9 @@ package com.my.edu.mber.vo;
 
 import java.io.Serializable;
 
-public class MberVO implements Serializable {   //직렬화
+import com.my.edu.commom.ComDefaultVO;
+
+public class MberVO extends ComDefaultVO implements Serializable {   //직렬화
 
 	private static final long serialVersionUID = 1L;
 	
@@ -29,6 +31,15 @@ public class MberVO implements Serializable {   //직렬화
 	private String updtId;
 	
 	private String updtDt;
+	
+	private String rnum;
+
+	@Override
+	public String toString() {
+		return "MberVO [mberNo=" + mberNo + ", mberId=" + mberId + ", mberPw=" + mberPw + ", name=" + name + ", birth="
+				+ birth + ", email=" + email + ", mobileTelNo=" + mobileTelNo + ", useYn=" + useYn + ", regId=" + regId
+				+ ", regDt=" + regDt + ", updtId=" + updtId + ", updtDt=" + updtDt + ", rnum=" + rnum + "]";
+	}
 
 	public String getMberNo() {
 		return mberNo;
@@ -125,9 +136,13 @@ public class MberVO implements Serializable {   //직렬화
 	public void setUpdtDt(String updtDt) {
 		this.updtDt = updtDt;
 	}
-	
-	
 
-	
+	public String getRnum() {
+		return rnum;
+	}
 
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
+	
 }

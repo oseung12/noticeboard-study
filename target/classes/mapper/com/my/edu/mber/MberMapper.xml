@@ -7,23 +7,45 @@
 	<select id="selectMberList" parameterType="com.my.edu.mber.vo.MberVO" resultType="com.my.edu.mber.vo.MberVO">
 		/* selectMberList */
 		
-		SELECT 
-			MBER_NO
-			,MBER_ID
-			,MBER_PW
-			,NAME
-			,BIRTH
-			,EMAIL
-			,MOBILE_TELNO
-			,USE_YN
-			,REG_ID
-			,REG_DT
-			,UPDT_ID
-			,UPDT_DT
-		FROM 
-			MEMBER
-		WHERE
-			USE_YN = 'Y'
+		SELECT
+			GG.*
+		FROM
+			(
+				SELECT 
+					MBER_NO
+					,MBER_ID
+					,MBER_PW
+					,NAME
+					,BIRTH
+					,EMAIL
+					,MOBILE_TELNO
+					,USE_YN
+					,REG_ID
+					,REG_DT
+					,UPDT_ID
+					,UPDT_DT
+					,ROW_NUMBER() OVER(ORDER BY MBER_NO DESC) AS RNUM
+				FROM 
+					MEMBER
+				WHERE
+						USE_YN = 'Y'
+			) GG
+	    WHERE
+	        GG.RNUM BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+		
+	</select>
+	
+	
+		<!-- 회원 목록 목록 총 갯수-->
+	<select id="selectMberListCnt" parameterType="com.my.edu.mber.vo.MberVO" resultType="int">
+	/* selectMberListCnt */
+	
+	SELECT
+		COUNT(*) AS totCnt
+	FROM 
+		MEMBER 
+	WHERE
+		USE_YN = 'Y'
 		
 	</select>
 	

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.my.edu.board.vo.BoardVO;
 import com.my.edu.mber.mapper.MberMapper;
 import com.my.edu.mber.service.MberService;
 import com.my.edu.mber.vo.MberVO;
@@ -22,6 +23,14 @@ public class MberServiceImpl implements MberService{
 	@Override
 	public List<MberVO> selectMberList(MberVO mberVO) throws Exception {
 		return mberMapper.selectMberList(mberVO);
+	}
+	
+	/**
+	 * 회원 목록 총 갯수
+	 */
+	@Override
+	public int selectMberListCnt(MberVO mberVO) throws Exception {
+		return mberMapper.selectMberListCnt(mberVO);
 	}
 	
 	/**

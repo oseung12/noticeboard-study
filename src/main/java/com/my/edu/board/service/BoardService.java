@@ -15,6 +15,14 @@ public interface BoardService {
 	public List<BoardVO> selectBoardList(BoardVO boardVO) throws Exception;
 	
 	/**
+	 * 게시판 목록 총 갯수
+	 * @param boardVO
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectBoardListCnt(BoardVO boardVO) throws Exception;
+	
+	/**
 	 * 게시판 등록
 	 * @param boardVO
 	 * @return

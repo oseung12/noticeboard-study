@@ -15,6 +15,7 @@ import com.my.edu.board.vo.BoardVO;
 import com.my.edu.mber.service.MberService;
 import com.my.edu.mber.service.impl.MberServiceImpl;
 import com.my.edu.mber.vo.MberVO;
+import com.my.edu.util.PaginationInfo;
 
 @Controller
 public class BoardController {
@@ -35,6 +36,36 @@ public class BoardController {
 	 */
 	@RequestMapping(value = "/board/boardList.do")
 	public String selectBoardList(HttpServletRequest request, Model model, BoardVO boardVO) throws Exception {
+		
+		int currentPage = 1;
+		int cntPerPage = 10;
+		int pageSize = 10;
+		
+		if(boardVO.getCurrentPage() == 0 ) {
+			boardVO.setCurrentPage(currentPage);
+		}
+		
+		if(boardVO.getCntPerPage() == 0) {
+			boardVO.setCntPerPage(cntPerPage);
+		}
+		
+		if(boardVO.getPageSize() == 0) {
+			boardVO.setPageSize(pageSize);
+		}
+		
+		int totCnt = boardService.selectBoardListCnt(boardVO);
+		
+		PaginationInfo pagination = new PaginationInfo(boardVO.getCurrentPage(), boardVO.getCntPerPage(), boardVO.getPageSize());
+		
+		pagination.setTotalRecordCount(totCnt);
+		pagination.setFirstRecordIndex(pagination.getFirstRecordIndex());
+		pagination.setLastRecordIndex(pagination.getLastRecordIndex());
+		
+		model.addAttribute("pagination", pagination);
+		
+		boardVO.setTotalRecordCount(pagination.getTotalPageCount());
+		boardVO.setFirstRecordIndex(pagination.getFirstRecordIndex());
+		boardVO.setLastRecordIndex(pagination.getLastRecordIndex());
 		
 		model.addAttribute("mberId", boardVO.getMberId());
 		

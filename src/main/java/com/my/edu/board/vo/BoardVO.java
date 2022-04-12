@@ -2,7 +2,9 @@ package com.my.edu.board.vo;
 
 import java.io.Serializable;
 
-public class BoardVO implements Serializable {
+import com.my.edu.commom.ComDefaultVO;
+
+public class BoardVO extends ComDefaultVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

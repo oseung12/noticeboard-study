@@ -2,6 +2,7 @@ package com.my.edu.mber.service;
 
 import java.util.List;
 
+import com.my.edu.board.vo.BoardVO;
 import com.my.edu.mber.vo.MberVO;
 
 public interface MberService {
@@ -13,6 +14,15 @@ public interface MberService {
 	 * @throws Exception
 	 */
 	public List<MberVO> selectMberList(MberVO mberVO) throws Exception;
+	
+	/**
+	 * 회원 목록 총 갯수
+	 * @param boardVO
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectMberListCnt(MberVO mberVO) throws Exception;
+	
 	
 	/**
 	 * 회원 검증

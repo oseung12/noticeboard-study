@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +67,14 @@ public class HomeController {
 		
 		mav.setViewName("jsonView");
 		return mav;
+	}
+	
+	@RequestMapping(value = "/logout.do")
+	public String logOut(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate(); //세션에 있는 데이터 모두 삭제
+		
+		return "redirect:/";
 	}
 }

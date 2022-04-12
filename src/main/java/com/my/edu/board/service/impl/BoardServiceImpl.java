@@ -16,13 +16,20 @@ public class BoardServiceImpl implements BoardService {
 	@Resource(name = "boardMapper")
 	private BoardMapper boardMapper;
 	
-	/*
+	/**
 	 * 게시판 목록
 	 */
 	@Override
 	public List<BoardVO> selectBoardList(BoardVO boardVO) throws Exception {
-		
 		return boardMapper.selectBoardList(boardVO);
+	}
+	
+	/**
+	 * 게시판 목록 총 갯수
+	 */
+	@Override
+	public int selectBoardListCnt(BoardVO boardVO) throws Exception {
+		return boardMapper.selectBoardListCnt(boardVO);
 	}
 	
 	/**
@@ -33,7 +40,6 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public int boardInsert(BoardVO boardVO) throws Exception{
-		
 		return boardMapper.boardInsert(boardVO);
 	}
 	
@@ -42,7 +48,6 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public BoardVO selectBoardDetail(BoardVO boardVO) throws Exception {
-	
 		return boardMapper.selectBoardDetail(boardVO);
 	}
 
@@ -51,7 +56,6 @@ public class BoardServiceImpl implements BoardService {
 	 */
 	@Override
 	public int boardHitsUpdate(BoardVO boardVO) throws Exception {
-
 		return boardMapper.boardHitsUpdate(boardVO);
 	}
 	

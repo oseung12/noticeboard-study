@@ -8,29 +8,50 @@
 	/* selectBoardList */
 	
 	SELECT
-		A.BOARD_NO
-		,A.TITLE
-		,A.CONTENT
-		,A.BOARD_PW
-		, CASE
-			WHEN A.BOARD_OPEN_YN IS NULL
-			THEN 'Y'
-			ELSE A.BOARD_OPEN_YN
-		END AS BOARD_OPEN_YN
-		,A.HITS
-		,A.USE_YN
-		,A.REG_ID
-		,TO_CHAR(A.REG_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REG_DATE
-		,A.UPDT_ID
-		,TO_CHAR(A.UPDT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS UPDT_DATE
-        ,B.NAME
-		,ROW_NUMBER() OVER(ORDER BY A.BOARD_NO DESC) AS RNUM
+		GG.*
+	FROM
+		(
+			SELECT
+				A.BOARD_NO
+				,A.TITLE
+				,A.CONTENT
+				,A.BOARD_PW
+				, CASE
+					WHEN A.BOARD_OPEN_YN IS NULL
+					THEN 'Y'
+					ELSE A.BOARD_OPEN_YN
+				END AS BOARD_OPEN_YN
+				,A.HITS
+				,A.USE_YN
+				,A.REG_ID
+				,TO_CHAR(A.REG_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REG_DATE
+				,A.UPDT_ID
+				,TO_CHAR(A.UPDT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS UPDT_DATE
+		        ,B.NAME
+				,ROW_NUMBER() OVER(ORDER BY A.BOARD_NO DESC) AS RNUM
+			FROM 
+				BOARD A
+		        LEFT OUTER JOIN MEMBER B ON B.MBER_ID = A.REG_ID
+			WHERE
+				A.USE_YN = 'Y'
+			ORDER BY A.BOARD_NO DESC
+    	) GG
+    WHERE
+        GG.RNUM BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+		
+	</select>
+	
+		<!-- 게시판 목록 총 갯수-->
+	<select id="selectBoardListCnt" parameterType="com.my.edu.board.vo.BoardVO" resultType="int">
+	/* selectBoardCnt */
+	
+	SELECT
+		COUNT(*) AS totCnt
 	FROM 
 		BOARD A
         LEFT OUTER JOIN MEMBER B ON B.MBER_ID = A.REG_ID
 	WHERE
 		A.USE_YN = 'Y'
-	ORDER BY A.BOARD_NO DESC
 		
 	</select>
 	

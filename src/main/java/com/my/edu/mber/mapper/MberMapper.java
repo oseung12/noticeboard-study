@@ -15,6 +15,14 @@ public interface MberMapper {
 	public List<MberVO> selectMberList(MberVO mberVO) throws Exception;
 	
 	/**
+	 * 회원 목록 총 갯수
+	 * @param boardVO
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectMberListCnt(MberVO mberVO) throws Exception;
+	
+	/**
 	 * 회원 검증
 	 * @param mberVO
 	 * @return
