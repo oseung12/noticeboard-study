@@ -112,5 +112,6 @@ function fnModify() {
 	<button type="button" style="" id="cancelBtn" onclick="fnModify();">수정</button>
 	<button type="button" style="" id="deleteBtn" onclick="fnDelete();">삭제</button>
 	 </c:if>
+	 
 </body>
 </html>
