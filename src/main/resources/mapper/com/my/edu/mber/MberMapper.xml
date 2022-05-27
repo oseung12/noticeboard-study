@@ -35,7 +35,6 @@
 		
 	</select>
 	
-	
 		<!-- 회원 목록 목록 총 갯수-->
 	<select id="selectMberListCnt" parameterType="com.my.edu.mber.vo.MberVO" resultType="int">
 	/* selectMberListCnt */

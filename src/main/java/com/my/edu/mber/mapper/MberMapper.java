@@ -45,5 +45,4 @@ public interface MberMapper {
 	 * @throws Exception
 	 */
 	public int mberInsert(MberVO mberVO) throws Exception;
-	
 }

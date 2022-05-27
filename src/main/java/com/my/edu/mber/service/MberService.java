@@ -46,6 +46,5 @@ public interface MberService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int mberInsert(MberVO mberVO) throws Exception;
-	
+	public int mberInsert(MberVO mberVO) throws Exception;	
 }

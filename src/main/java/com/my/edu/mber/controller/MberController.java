@@ -106,5 +106,4 @@ public class MberController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
 }

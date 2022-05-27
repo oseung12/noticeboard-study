@@ -56,5 +56,4 @@ public class MberServiceImpl implements MberService{
 	public int mberInsert(MberVO mberVO) throws Exception {
 		return mberMapper.mberInsert(mberVO);
 	}
-	
 }

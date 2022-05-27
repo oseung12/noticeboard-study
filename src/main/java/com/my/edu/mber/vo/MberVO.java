@@ -4,9 +4,19 @@ import java.io.Serializable;
 
 import com.my.edu.commom.ComDefaultVO;
 
-public class MberVO extends ComDefaultVO implements Serializable {   //직렬화
-
+public class MberVO extends ComDefaultVO implements Serializable {   
+		// Serializable => 우리가 만든 클래스가 파일에 읽거나 쓸 수 있도록 하거나, 다른 서버로 보내거나 받을 수 있도록 하려면 반드시 구현하는 인터페이스
+		// Serializable 인터페이스를 구현하면 JVM에서 해당 객체는 저장하거나 다른 서버로 전송할 수 있도록 해준다.
+		
+		/**
+		 * 반드시 static final long 으로 선언해야한다.
+		 * 직렬화, 역직렬화 시 serialVersionUID 상수가 없으면 JVM에서 만들어 넣어준다.
+		 */
 	private static final long serialVersionUID = 1L;
+		// private => 같은 클래스 내부에서만 사용이 가능하다.
+		// static  => 메모리가 JVM의 static메모리에 올라간다.(application이 실행되면 모두 메모리에 할당되고, 종료되면 삭제된다.) => 객체를 생성하지 않는다.
+		// final   => 재할당할 수 없도록 만든다.
+		// private static final을 선언한 변수를 사용하면 재할당 하지 못하며, 메모리에 한 번 올라가면 같은 값을 클래스 내부의 전체 필드, 메서드에서 공유한다.
 	
 	private String mberNo;
 	
