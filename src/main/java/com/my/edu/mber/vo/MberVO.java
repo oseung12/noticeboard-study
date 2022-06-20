@@ -154,5 +154,4 @@ public class MberVO extends ComDefaultVO implements Serializable {
 	public void setRnum(String rnum) {
 		this.rnum = rnum;
 	}
-	
 }

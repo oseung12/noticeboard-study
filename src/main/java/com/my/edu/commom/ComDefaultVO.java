@@ -145,5 +145,4 @@ public class ComDefaultVO {
 		this.hasNextPage = hasNextPage;
 	}
 	
-	
 }

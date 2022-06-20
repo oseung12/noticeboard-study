@@ -60,6 +60,5 @@ public interface BoardService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int boardUpdate(BoardVO boardVO) throws Exception;
-	
+	public int boardUpdate(BoardVO boardVO) throws Exception;	
 }

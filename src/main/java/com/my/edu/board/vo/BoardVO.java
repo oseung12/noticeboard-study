@@ -148,5 +148,4 @@ public class BoardVO extends ComDefaultVO implements Serializable {
 		this.rnum = rnum;
 	}
 
-	
 }

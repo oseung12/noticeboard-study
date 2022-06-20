@@ -48,3 +48,4 @@
    <mybatis-spring:scan base-package="com.my.edu.**" />	
 		
 </beans>
+
